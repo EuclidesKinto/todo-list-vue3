@@ -4,7 +4,7 @@
     <div class="w-full sm:w-1/2 lg:w-1/3 mx-auto">
       <TodoSpinner v-if="loading"/>
 
-      <template>
+      <template v-else>
         <TodoFormAdd/>
 
         <TodoItems/>
@@ -21,7 +21,6 @@ import  TodoSpinner  from '@/components/TodoSpinner';
 import TodoFormAdd from '@/components/TodoFormAdd.vue';
 import TodoItems from '@/components/TodoItems';
 import TodoEmpty from '@/components/TodoEmpty';
-import axios from 'axios';
 
 export default {
 
@@ -34,20 +33,11 @@ export default {
   },
   data() {
     return {
-      todos: [],
       loading: false,
-      error: null
     };
   },
   created(){
-    this.loading = true;
-    axios.get('http://localhost:3000/todos')
-    .then((response) =>{
-      this.$store.commit('storeTodos', response.data);
-    })
-    .finally(() => {
-      this.loading = false;
-    });
+    this.$store.dispatch('getTodos');
   },
 
 
