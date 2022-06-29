@@ -26,7 +26,9 @@
         </div>
 
         <div class="ml-auto flex items-center justify-center">
-            <button class="focus:outline-none px-1 hover:bg-red-400 rounded">
+            <button
+            @click="onDeleteTodo"
+            class="focus:outline-none px-1 hover:bg-red-400 rounded">
                 x
             </button>
         </div>
@@ -71,6 +73,10 @@ export default {
     toggleCompleted() {
       this.isCompleted = !this.isCompleted;
       this.updateTodo();
+    },
+
+    onDeleteTodo() {
+      this.$store.dispatch('deleteTodo', this.todo.id);
     }
   },
 }
