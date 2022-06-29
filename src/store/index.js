@@ -28,7 +28,12 @@ export default createStore({
       .then((res) =>{
         commit('storeTodo', res.data);
       });
-    }
+    },
+
+    updateTodo(context,{ id, data }){
+      return axios.put(`http://localhost:3000/todos/${id}`, data)
+
+    },
   },
   modules: {
   }
